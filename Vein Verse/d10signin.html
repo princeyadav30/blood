@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - LifeDrops Blood Donation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: linear-gradient(rgba(78, 0, 0, 0.7), rgba(78, 0, 0, 0.7)), 
+                        url('—Pngtree—geometric gradient creative blood donation_1127152.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #490101;
+            line-height: 1.6;
+        }
+
+        /* Navbar Styles - Matching Home Page */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(78, 0, 0, 0.95);
+            color: #fff;
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 10px 0;
+            background: rgba(78, 0, 0, 0.98);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .navbar .logo {
+            font-size: 28px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .logo i {
+            margin-right: 10px;
+            color: #ff4d4d;
+        }
+
+        .navbar .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .navbar .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .nav-links a i {
+            margin-right: 8px;
+        }
+
+        .navbar .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #ff4d4d;
+            transition: width 0.3s ease;
+        }
+
+        .navbar .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .navbar .nav-links a:hover {
+            color: #ff4d4d;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Main Login Container */
+        .main-container {
+            padding-top: 80px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Hero Section for Login */
+        .login-hero {
+            padding: 100px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .login-hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .login-hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+
+        /* Login Section */
+        .login-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            flex-grow: 1;
+        }
+
+        .login-container {
+            display: flex;
+            max-width: 1200px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-info {
+            flex: 1;
+            padding: 60px;
+            background: linear-gradient(135deg, #ff4d4d, #cc0000);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .login-info h2 {
+            font-size: 36px;
+            margin-bottom: 25px;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+        }
+
+        .login-info h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: white;
+        }
+
+        .login-info p {
+            margin-bottom: 30px;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .benefits-list {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .benefits-list li {
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 35px;
+        }
+
+        .benefits-list li::before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: white;
+            font-size: 20px;
+        }
+
+        .login-box {
+            flex: 1;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .login-box h3 {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #4e0000;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+        }
+
+        .login-box h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #ff4d4d;
+        }
+
+        .login-box p {
+            margin-bottom: 30px;
+            color: #666;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #4e0000;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: #ff4d4d;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 77, 77, 0.2);
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+
+        .remember-me input {
+            margin-right: 8px;
+        }
+
+        .forgot-password a {
+            color: #ff4d4d;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px;
+            font-size: 18px;
+            background: #ff4d4d;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.4s ease-in-out;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: #4e0000;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 77, 77, 0.3);
+        }
+
+        .social-login {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .social-login p {
+            position: relative;
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        .social-login p::before,
+        .social-login p::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30%;
+            height: 1px;
+            background: #ddd;
+        }
+
+        .social-login p::before {
+            left: 0;
+        }
+
+        .social-login p::after {
+            right: 0;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon.facebook {
+            background: #3b5998;
+        }
+
+        .social-icon.google {
+            background: #db4437;
+        }
+
+        .social-icon.twitter {
+            background: #1da1f2;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px);
+            opacity: 0.9;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+        }
+
+        .register-link a {
+            color: #ff4d4d;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer - Matching Home Page */
+        .footer {
+            background: #4e0000;
+            color: #fff;
+            padding: 80px 0 30px;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(to right, #ff4d4d, #cc0000);
+        }
+
+        .footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 22px;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: #ff4d4d;
+        }
+
+        .footer-column p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a:hover {
+            color: #ff4d4d;
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .footer-links a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #ff4d4d;
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom p {
+            opacity: 0.7;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .login-container {
+                flex-direction: column;
+            }
+            
+            .login-info, .login-box {
+                padding: 40px;
+            }
+            
+            .login-hero h1 {
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .navbar .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: #4e0000;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+                transition: all 0.5s ease;
+            }
+            
+            .navbar .nav-links.active {
+                left: 0;
+            }
+            
+            .login-hero {
+                padding: 80px 20px;
+            }
+            
+            .login-hero h1 {
+                font-size: 32px;
+            }
+            
+            .login-hero p {
+                font-size: 18px;
+            }
+            
+            .login-info h2, .login-box h3 {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .login-info, .login-box {
+                padding: 30px 20px;
+            }
+            
+            .login-hero h1 {
+                font-size: 28px;
+            }
+            
+            .remember-forgot {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .footer .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="d7home.html" class="logo"><i class="fas fa-tint"></i> LIFEDROPS</a>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="d7home.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="d12funds.html"><i class="fas fa-hand-holding-heart"></i> Donate Funds</a></li>
+                <li><a href="d1.html"><i class="fas fa-concierge-bell"></i> Services</a></li>
+                <li><a href="d13dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="d11signup.html" class="btn" style="padding: 8px 20px; font-size: 14px;"><i class="fas fa-user-plus"></i> Register</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Hero Section -->
+        <section class="login-hero">
+            <h1>Welcome Back, Lifesaver!</h1>
+            <p>Sign in to your LifeDrops account to schedule donations, track your impact, and join our community of heroes.</p>
+        </section>
+
+        <!-- Login Section -->
+        <section class="login-section">
+            <div class="login-container">
+                <div class="login-info">
+                    <h2>Why Login?</h2>
+                    <p>Access your personalized donor dashboard and continue your lifesaving journey with LifeDrops.</p>
+                    
+                    <ul class="benefits-list">
+                        <li>Schedule and manage your donation appointments</li>
+                        <li>Track your donation history and impact</li>
+                        <li>Receive notifications when your blood is used</li>
+                        <li>Get personalized health tips for donors</li>
+                        <li>Earn rewards and recognition for your contributions</li>
+                    </ul>
+                    
+                    <p>Not registered yet? Join thousands of lifesavers in our community.</p>
+                    <a href="d11signup.html" class="btn">Create Account</a>
+                </div>
+                
+                <div class="login-box">
+                    <h3>Sign In</h3>
+                    <p>Enter your credentials to access your account</p>
+                    
+                    <form>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" required placeholder="Enter your password">
+                        </div>
+                        
+                        <div class="remember-forgot">
+                            <div class="remember-me">
+                                <input type="checkbox" id="remember" name="remember">
+                                <label for="remember">Remember me</label>
+                            </div>
+                            <div class="forgot-password">
+                                <a href="d16forget.html">Forgot password?</a>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn">Login</button>
+                        
+                        <div class="social-login">
+                            <p>Or sign in with</p>
+                            <div class="social-icons">
+                                <a href="#" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social-icon google"><i class="fab fa-google"></i></a>
+                                <a href="#" class="social-icon twitter"><i class="fab fa-twitter"></i></a>
+                            </div>
+                        </div>
+                        
+                        <div class="register-link">
+                            Don't have an account? <a href="d11signup.html">Register here</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-column">
+                <h3><i class="fas fa-tint"></i> LifeDrops</h3>
+                <p>Connecting donors with those in need since 2010. Our mission is to ensure a safe and sufficient blood supply for our community.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="d7home.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="d12funds.html"><i class="fas fa-chevron-right"></i> Donate Funds</a></li>
+                    <li><a href="d1.html"><i class="fas fa-chevron-right"></i> Services</a></li>
+                    <li><a href="d13dashboard.html"><i class="fas fa-chevron-right"></i> Dashboard</a></li>
+                    <li><a href="d10signin.html"><i class="fas fa-chevron-right"></i> Become a Donor</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-map-marker-alt"></i> 123 LifeSaver Ave, Health City</a></li>
+                    <li><a href="tel:+1234567890"><i class="fas fa-phone-alt"></i> (123) 456-7890</a></li>
+                    <li><a href="mailto:info@lifedrops.org"><i class="fas fa-envelope"></i> info@lifedrops.org</a></li>
+                    <li><a href="#"><i class="fas fa-clock"></i> Mon-Fri: 8AM-8PM</a></li>
+                    <li><a href="#"><i class="fas fa-clock"></i> Sat-Sun: 9AM-5PM</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Newsletter</h3>
+                <p>Subscribe to receive updates on blood needs, events, and donor stories.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit" class="btn" style="width: 100%; padding: 10px; margin-top: 10px;">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 LifeDrops Blood Donation Management System. All rights reserved.</p>
+            <ul class="footer-links" style="display: flex; justify-content: center; margin-top: 15px;">
+                <li><a href="d9privacy.html">Privacy Policy</a></li>
+                <li style="margin: 0 15px;"><a href="d8terms.html">Terms of Service</a></li>
+                <li><a href="d6contact.html">Contact Us</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Form Submission
+        const loginForm = document.querySelector('form');
+        if (loginForm) {
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                // Add your form submission logic here
+                window.location.href = 'd7home.html'; // Redirect after login
+            });
+        }
+    </script>
+</body>
+</html>

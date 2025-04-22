@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - LifeDrops</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f9f9f9;
+        }
+
+        /* Navbar Styles - Matching Home Page */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(78, 0, 0, 0.95);
+            color: #fff;
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 10px 0;
+            background: rgba(78, 0, 0, 0.98);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .navbar .logo {
+            font-size: 28px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .logo i {
+            margin-right: 10px;
+            color: #ff4d4d;
+        }
+
+        .navbar .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .navbar .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .nav-links a i {
+            margin-right: 8px;
+        }
+
+        .navbar .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #ff4d4d;
+            transition: width 0.3s ease;
+        }
+
+        .navbar .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .navbar .nav-links a:hover {
+            color: #ff4d4d;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Main Content Styles */
+        .main-container {
+            flex: 1;
+            padding: 100px 0 40px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #4e0000;
+            text-align: center;
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+        }
+
+        .contact-section {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .contact-form, .contact-info {
+            flex: 1;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form h2, .contact-info h2 {
+            color: #4e0000;
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        .form-group button {
+            background-color: #4e0000;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group button:hover {
+            background-color: #610707;
+            transform: translateY(-2px);
+        }
+
+        .contact-info p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .contact-info p strong {
+            color: #4e0000;
+        }
+
+        .map iframe {
+            width: 100%;
+            height: 300px;
+            border: 0;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        /* Footer - Matching Home Page */
+        .footer {
+            background: #4e0000;
+            color: #fff;
+            padding: 80px 0 30px;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(to right, #ff4d4d, #cc0000);
+        }
+
+        .footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 22px;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: #ff4d4d;
+        }
+
+        .footer-column p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a:hover {
+            color: #ff4d4d;
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .footer-links a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #ff4d4d;
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom p {
+            opacity: 0.7;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .contact-section {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .navbar .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: #4e0000;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+                transition: all 0.5s ease;
+            }
+            
+            .navbar .nav-links.active {
+                left: 0;
+            }
+            
+            h1 {
+                font-size: 32px;
+            }
+            
+            .contact-form, .contact-info {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 28px;
+            }
+            
+            .footer .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="d7home.html" class="logo"><i class="fas fa-tint"></i> LIFEDROPS</a>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="d7home.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="d12funds.html"><i class="fas fa-hand-holding-heart"></i> Donate Funds</a></li>
+                <li><a href="d1.html"><i class="fas fa-concierge-bell"></i> Services</a></li>
+                <li><a href="d13dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="d10signin.html" class="btn" style="padding: 8px 20px; font-size: 14px;"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <div class="contact-section">
+                <!-- Contact Form -->
+                <div class="contact-form">
+                    <h2>Send Us a Message</h2>
+                    <form action="#" method="POST">
+                        <div class="form-group">
+                            <label for="name">Your Name:</label>
+                            <input type="text" id="name" name="name" required placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email:</label>
+                            <input type="email" id="email" name="email" required placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject:</label>
+                            <input type="text" id="subject" name="subject" required placeholder="Enter the subject">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message:</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Enter your message"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="contact-info">
+                    <h2>Our Contact Information</h2>
+                    <p><strong>Address:</strong> 123 Blood Donation Street, City, Country</p>
+                    <p><strong>Phone:</strong> +123 456 7890</p>
+                    <p><strong>Email:</strong> info@blooddonation.com</p>
+                    <p><strong>Working Hours:</strong> Mon - Fri: 9 AM - 6 PM</p>
+
+                    <!-- Map -->
+                    <div class="map">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.8354345093747!2d144.9537353153166!3d-37.816279742021665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577d6d2e5a0b3b4!2sBlood%20Donation%20Center!5e0!3m2!1sen!2sus!4v1622549400000!5m2!1sen!2sus"
+                            allowfullscreen=""
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-column">
+                <h3><i class="fas fa-tint"></i> LifeDrops</h3>
+                <p>Connecting donors with those in need since 2010. Our mission is to ensure a safe and sufficient blood supply for our community.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="d7home.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="d12funds.html"><i class="fas fa-chevron-right"></i> Donate Funds</a></li>
+                    <li><a href="d1.html"><i class="fas fa-chevron-right"></i> Services</a></li>
+                    <li><a href="d13dashboard.html"><i class="fas fa-chevron-right"></i> Dashboard</a></li>
+                    <li><a href="d10signin.html"><i class="fas fa-chevron-right"></i> Become a Donor</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-map-marker-alt"></i> 123 LifeSaver Ave, Health City</a></li>
+                    <li><a href="tel:+1234567890"><i class="fas fa-phone-alt"></i> (123) 456-7890</a></li>
+                    <li><a href="mailto:info@lifedrops.org"><i class="fas fa-envelope"></i> info@lifedrops.org</a></li>
+                    <li><a href="#"><i class="fas fa-clock"></i> Mon-Fri: 8AM-8PM</a></li>
+                    <li><a href="#"><i class="fas fa-clock"></i> Sat-Sun: 9AM-5PM</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Newsletter</h3>
+                <p>Subscribe to receive updates on blood needs, events, and donor stories.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit" class="btn" style="width: 100%; padding: 10px; margin-top: 10px;">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 LifeDrops Blood Donation Management System. All rights reserved.</p>
+            <ul class="footer-links" style="display: flex; justify-content: center; margin-top: 15px;">
+                <li><a href="d9privacy.html">Privacy Policy</a></li>
+                <li style="margin: 0 15px;"><a href="d8terms.html">Terms of Service</a></li>
+                <li><a href="d6contact.html">Contact Us</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+    </script>
+</body>
+</html>

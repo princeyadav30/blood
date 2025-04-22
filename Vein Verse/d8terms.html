@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms and Conditions - LifeDrops</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f8f8f8;
+            color: #490101;
+            line-height: 1.6;
+        }
+
+        /* Navbar Styles - Matching Home Page */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(78, 0, 0, 0.95);
+            color: #fff;
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 10px 0;
+            background: rgba(78, 0, 0, 0.98);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .navbar .logo {
+            font-size: 28px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .logo i {
+            margin-right: 10px;
+            color: #ff4d4d;
+        }
+
+        .navbar .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .navbar .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .nav-links a i {
+            margin-right: 8px;
+        }
+
+        .navbar .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #ff4d4d;
+            transition: width 0.3s ease;
+        }
+
+        .navbar .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .navbar .nav-links a:hover {
+            color: #ff4d4d;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Terms and Conditions Section */
+        .terms-section {
+            padding: 100px 20px 50px; /* Adjusted for fixed navbar */
+            background: #fff;
+        }
+
+        .terms-section .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .terms-section h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #4e0000;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .terms-section h2 {
+            font-size: 24px;
+            margin-top: 30px;
+            margin-bottom: 10px;
+            color: #4e0000;
+        }
+
+        .terms-section p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        .terms-section ul,
+        .terms-section ol {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        .terms-section li {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        .terms-section .last-updated {
+            font-size: 14px;
+            color: #999;
+            margin-top: 30px;
+        }
+
+        /* Footer - Matching Home Page */
+        .footer {
+            background: #4e0000;
+            color: #fff;
+            padding: 80px 0 30px;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(to right, #ff4d4d, #cc0000);
+        }
+
+        .footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 22px;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: #ff4d4d;
+        }
+
+        .footer-column p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a:hover {
+            color: #ff4d4d;
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .footer-links a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #ff4d4d;
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom p {
+            opacity: 0.7;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .navbar .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: #4e0000;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+                transition: all 0.5s ease;
+            }
+            
+            .navbar .nav-links.active {
+                left: 0;
+            }
+            
+            .terms-section {
+                padding: 80px 20px 30px;
+            }
+
+            .terms-section h1 {
+                font-size: 28px;
+            }
+
+            .terms-section h2 {
+                font-size: 22px;
+            }
+
+            .footer .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-links {
+                justify-content: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .terms-section h1 {
+                font-size: 26px;
+            }
+            
+            .terms-section h2 {
+                font-size: 20px;
+            }
+            
+            .terms-section p,
+            .terms-section li {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="d7home.html" class="logo"><i class="fas fa-tint"></i> LIFEDROPS</a>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="d7home.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="d12funds.html"><i class="fas fa-hand-holding-heart"></i> Donate Funds</a></li>
+                <li><a href="d1.html"><i class="fas fa-concierge-bell"></i> Services</a></li>
+                <li><a href="d13dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="d10signin.html" class="btn" style="padding: 8px 20px; font-size: 14px;"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Terms and Conditions Section -->
+    <section class="terms-section">
+        <div class="container">
+            <h1>Terms and Conditions</h1>
+            <p>Please read these terms and conditions carefully before using our blood donation services.</p>
+
+            <h2>1. Eligibility</h2>
+            <p>To donate blood, you must meet the following criteria:</p>
+            <ul>
+                <li>Be between 18 and 65 years old.</li>
+                <li>Weigh at least 50 kg (110 lbs).</li>
+                <li>Be in good health and free from infectious diseases.</li>
+                <li>Not have donated blood in the last 56 days.</li>
+            </ul>
+
+            <h2>2. Donation Process</h2>
+            <p>The blood donation process includes the following steps:</p>
+            <ol>
+                <li>Registration and health screening.</li>
+                <li>Blood donation (takes 10-15 minutes).</li>
+                <li>Post-donation refreshments and rest.</li>
+            </ol>
+
+            <h2>3. Privacy Policy</h2>
+            <p>We respect your privacy and ensure that all personal information is handled securely. Your data will only be used for blood donation purposes.</p>
+
+            <h2>4. Liability</h2>
+            <p>We are not liable for any health issues arising from blood donation if you do not meet the eligibility criteria or fail to disclose relevant health information.</p>
+
+            <h2>5. Changes to Terms</h2>
+            <p>We reserve the right to update these terms and conditions at any time. Please review this page periodically for changes.</p>
+
+            <p class="last-updated">Last updated: October 2023</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-column">
+                <h3><i class="fas fa-tint"></i> LifeDrops</h3>
+                <p>Connecting donors with those in need since 2010. Our mission is to ensure a safe and sufficient blood supply for our community.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="d7home.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="d12funds.html"><i class="fas fa-chevron-right"></i> Donate Funds</a></li>
+                    <li><a href="d1.html"><i class="fas fa-chevron-right"></i> Services</a></li>
+                    <li><a href="d13dashboard.html"><i class="fas fa-chevron-right"></i> Dashboard</a></li>
+                    <li><a href="d10signin.html"><i class="fas fa-chevron-right"></i> Become a Donor</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-map-marker-alt"></i> 123 LifeSaver Ave, Health City</a></li>
+                    <li><a href="tel:+1234567890"><i class="fas fa-phone-alt"></i> (123) 456-7890</a></li>
+                    <li><a href="mailto:info@lifedrops.org"><i class="fas fa-envelope"></i> info@lifedrops.org</a></li>
+                    <li><a href="#"><i class="fas fa-clock"></i> Mon-Fri: 8AM-8PM</a></li>
+                    <li><a href="#"><i class="fas fa-clock"></i> Sat-Sun: 9AM-5PM</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Newsletter</h3>
+                <p>Subscribe to receive updates on blood needs, events, and donor stories.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit" class="btn" style="width: 100%; padding: 10px; margin-top: 10px;">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 LifeDrops Blood Donation Management System. All rights reserved.</p>
+            <ul class="footer-links" style="display: flex; justify-content: center; margin-top: 15px;">
+                <li><a href="d9privacy.html">Privacy Policy</a></li>
+                <li style="margin: 0 15px;"><a href="d8terms.html">Terms of Service</a></li>
+                <li><a href="d6contact.html">Contact Us</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+    </script>
+</body>
+</html>

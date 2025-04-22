@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You for Donating Blood - LifeDrops</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f9f9f9;
+        }
+
+        /* Navbar Styles - Matching Home Page */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(78, 0, 0, 0.95);
+            color: #fff;
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 10px 0;
+            background: rgba(78, 0, 0, 0.98);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .navbar .logo {
+            font-size: 28px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .logo i {
+            margin-right: 10px;
+            color: #ff4d4d;
+        }
+
+        .navbar .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .navbar .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .nav-links a i {
+            margin-right: 8px;
+        }
+
+        .navbar .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #ff4d4d;
+            transition: width 0.3s ease;
+        }
+
+        .navbar .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .navbar .nav-links a:hover {
+            color: #ff4d4d;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Main Content Styles */
+        .main-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 100px 20px 20px;
+        }
+
+        .thank-you-card {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #4e0000;
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        p {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            color: #4e0000;
+            font-weight: bold;
+        }
+
+        .emoji {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .notification {
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .notification p {
+            margin: 0;
+            font-size: 16px;
+            color: #333;
+        }
+
+        /* Footer - Matching Home Page */
+        .footer {
+            background: #4e0000;
+            color: #fff;
+            padding: 80px 0 30px;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(to right, #ff4d4d, #cc0000);
+        }
+
+        .footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 22px;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: #ff4d4d;
+        }
+
+        .footer-column p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a:hover {
+            color: #ff4d4d;
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .footer-links a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #ff4d4d;
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom p {
+            opacity: 0.7;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .navbar .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: #4e0000;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+                transition: all 0.5s ease;
+            }
+            
+            .navbar .nav-links.active {
+                left: 0;
+            }
+            
+            .thank-you-card {
+                padding: 30px;
+            }
+            
+            h1 {
+                font-size: 32px;
+            }
+            
+            p {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .thank-you-card {
+                padding: 25px 20px;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+            
+            .footer .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="d7home.html" class="logo"><i class="fas fa-tint"></i> LIFEDROPS</a>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="d7home.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="d12funds.html"><i class="fas fa-hand-holding-heart"></i> Donate Funds</a></li>
+                <li><a href="d1.html"><i class="fas fa-concierge-bell"></i> Services</a></li>
+                <li><a href="d13dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="d10signin.html" class="btn" style="padding: 8px 20px; font-size: 14px;"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="thank-you-card">
+            <div class="emoji">🎉</div>
+            <h1>Thank You for Donating Blood!</h1>
+            <p>Your generosity can save lives. We truly appreciate your willingness to help others in need.</p>
+            <p>You will be notified by <span class="highlight">email</span> with details about <span class="highlight">where</span> and <span class="highlight">when</span> you need to donate blood.</p>
+            <div class="notification">
+                <p>Please check your inbox for further instructions. Thank you for being a lifesaver! 🩸❤️</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-column">
+                <h3><i class="fas fa-tint"></i> LifeDrops</h3>
+                <p>Connecting donors with those in need since 2010. Our mission is to ensure a safe and sufficient blood supply for our community.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="d7home.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="d12funds.html"><i class="fas fa-chevron-right"></i> Donate Funds</a></li>
+                    <li><a href="d1.html"><i class="fas fa-chevron-right"></i> Services</a></li>
+                    <li><a href="d13dashboard.html"><i class="fas fa-chevron-right"></i> Dashboard</a></li>
+                    <li><a href="d10signin.html"><i class="fas fa-chevron-right"></i> Become a Donor</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-map-marker-alt"></i> 123 LifeSaver Ave, Health City</a></li>
+                    <li><a href="tel:+1234567890"><i class="fas fa-phone-alt"></i> (123) 456-7890</a></li>
+                    <li><a href="mailto:info@lifedrops.org"><i class="fas fa-envelope"></i> info@lifedrops.org</a></li>
+                    <li><a href="#"><i class="fas fa-clock"></i> Mon-Fri: 8AM-8PM</a></li>
+                    <li><a href="#"><i class="fas fa-clock"></i> Sat-Sun: 9AM-5PM</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Newsletter</h3>
+                <p>Subscribe to receive updates on blood needs, events, and donor stories.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit" class="btn" style="width: 100%; padding: 10px; margin-top: 10px;">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 LifeDrops Blood Donation Management System. All rights reserved.</p>
+            <ul class="footer-links" style="display: flex; justify-content: center; margin-top: 15px;">
+                <li><a href="d9privacy.html">Privacy Policy</a></li>
+                <li style="margin: 0 15px;"><a href="d8terms.html">Terms of Service</a></li>
+                <li><a href="d6contact.html">Contact Us</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+    </script>
+</body>
+</html>

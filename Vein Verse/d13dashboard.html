@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | LifeDrops Blood Donation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f8f8f8;
+            color: #490101;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(78, 0, 0, 0.95);
+            color: #fff;
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 10px 0;
+            background: rgba(78, 0, 0, 0.98);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .navbar .logo {
+            font-size: 28px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .logo i {
+            margin-right: 10px;
+            color: #ff4d4d;
+        }
+
+        .navbar .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .navbar .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .navbar .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #ff4d4d;
+            transition: width 0.3s ease;
+        }
+
+        .navbar .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .navbar .nav-links a:hover {
+            color: #ff4d4d;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Dashboard Styles */
+        .dashboard {
+            padding: 120px 20px 50px;
+            background: #f8f8f8;
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .dashboard-header h1 {
+            font-size: 42px;
+            color: #4e0000;
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            display: inline-block;
+        }
+
+        .dashboard-header h1::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 3px;
+            background: #ff4d4d;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .dashboard-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 18px;
+            color: #555;
+        }
+
+        /* Stats Cards */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .stat-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 77, 77, 0.15);
+        }
+
+        .stat-card i {
+            font-size: 40px;
+            color: #ff4d4d;
+            margin-bottom: 15px;
+        }
+
+        .stat-card h3 {
+            font-size: 18px;
+            color: #4e0000;
+            margin-bottom: 10px;
+        }
+
+        .stat-card .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #4e0000;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Tables Section */
+        .tables-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .table-section {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .table-section h2 {
+            font-size: 24px;
+            color: #4e0000;
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .table-section h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: #ff4d4d;
+            bottom: 0;
+            left: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th {
+            background: #4e0000;
+            color: #fff;
+            padding: 15px;
+            text-align: left;
+            font-weight: 500;
+        }
+
+        table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            color: #555;
+        }
+
+        table tr:last-child td {
+            border-bottom: none;
+        }
+
+        table tr:hover td {
+            background: #fff9f9;
+        }
+
+        .table-link {
+            color: #ff4d4d;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .table-link:hover {
+            color: #4e0000;
+            text-decoration: underline;
+        }
+
+        /* Blood Stock Section */
+        .blood-stock {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-bottom: 50px;
+        }
+
+        .blood-stock h2 {
+            font-size: 24px;
+            color: #4e0000;
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .blood-stock h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: #ff4d4d;
+            bottom: 0;
+            left: 0;
+        }
+
+        .blood-groups {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .blood-group-card {
+            background: #f8f8f8;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .blood-group-card.low {
+            background: #fff0f0;
+            border-left: 4px solid #ff4d4d;
+        }
+
+        .blood-group-card.critical {
+            background: #ffecec;
+            border-left: 4px solid #cc0000;
+            animation: pulse 2s infinite;
+        }
+
+        .blood-group-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 77, 77, 0.1);
+        }
+
+        .blood-group {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4e0000;
+            margin-bottom: 5px;
+        }
+
+        .blood-units {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .blood-status {
+            font-size: 14px;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+
+        .status-normal {
+            color: #28a745;
+        }
+
+        .status-low {
+            color: #ffc107;
+        }
+
+        .status-critical {
+            color: #dc3545;
+        }
+
+        /* Recent Activity */
+        .activity-section {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .activity-section h2 {
+            font-size: 24px;
+            color: #4e0000;
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .activity-section h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: #ff4d4d;
+            bottom: 0;
+            left: 0;
+        }
+
+        .activity-list {
+            list-style: none;
+        }
+
+        .activity-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            background: #ff4d4d;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .activity-content {
+            flex-grow: 1;
+        }
+
+        .activity-text {
+            color: #555;
+        }
+
+        .activity-time {
+            font-size: 12px;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #4e0000;
+            color: #fff;
+            padding: 80px 0 30px;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(to right, #ff4d4d, #cc0000);
+        }
+
+        .footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 22px;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: #ff4d4d;
+        }
+
+        .footer-column p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a:hover {
+            color: #ff4d4d;
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .footer-links a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #ff4d4d;
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom p {
+            opacity: 0.7;
+            font-size: 14px;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #ff4d4d;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 77, 77, 0.3);
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: #4e0000;
+            transform: translateY(-5px);
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .tables-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .navbar .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: #4e0000;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+                transition: all 0.5s ease;
+            }
+            
+            .navbar .nav-links.active {
+                left: 0;
+            }
+            
+            .dashboard-header h1 {
+                font-size: 32px;
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .blood-groups {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .blood-groups {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-column p, 
+            .footer-links {
+                text-align: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="d15profile.html" class="logo"><i class="fas fa-tint"></i> LIFEDROPS</a>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="d7home.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="d12funds.html"><i class="fas fa-hand-holding-heart"></i> Donate Funds</a></li>
+                <li><a href="d1.html"><i class="fas fa-concierge-bell"></i> Services</a></li>
+                <li><a href="d13dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="d10signin.html" class="btn-submit" style="padding: 8px 20px; font-size: 14px;"><i class="fas fa-user-plus"></i> Register</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <h1>Admin Dashboard</h1>
+                <p>Monitor and manage all blood donation activities in one place</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-container">
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Total Donors</h3>
+                    <div class="stat-number">1,248</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-tint"></i>
+                    <h3>Total Donations</h3>
+                    <div class="stat-number">3,745</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <h3>Funds Raised</h3>
+                    <div class="stat-number">$24,580</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-heartbeat"></i>
+                    <h3>Lives Saved</h3>
+                    <div class="stat-number">11,235</div>
+                </div>
+            </div>
+
+            <!-- Tables Section -->
+            <div class="tables-container">
+                <div class="table-section">
+                    <h2>Recent Donors</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Blood Group</th>
+                                <th>Last Donation</th>
+                                <th>Contact</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>John Doe</td>
+                                <td>O+</td>
+                                <td>2 days ago</td>
+                                <td><a href="d14dash.html" class="table-link">View</a></td>
+                            </tr>
+                            <tr>
+                                <td>Jane Smith</td>
+                                <td>A-</td>
+                                <td>1 week ago</td>
+                                <td><a href="d14dash.html" class="table-link">View</a></td>
+                            </tr>
+                            <tr>
+                                <td>Alice Johnson</td>
+                                <td>B+</td>
+                                <td>2 weeks ago</td>
+                                <td><a href="d14dash.html" class="table-link">View</a></td>
+                            </tr>
+                            <tr>
+                                <td>Robert Brown</td>
+                                <td>AB+</td>
+                                <td>3 weeks ago</td>
+                                <td><a href="d14dash.html" class="table-link">View</a></td>
+                            </tr>
+                            <tr>
+                                <td>Emily Davis</td>
+                                <td>O-</td>
+                                <td>1 month ago</td>
+                                <td><a href="d14dash.html" class="table-link">View</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="table-section">
+                    <h2>Recent Fund Donations</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Donor</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th>Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Michael Wilson</td>
+                                <td>$100</td>
+                                <td>Today</td>
+                                <td>Equipment</td>
+                            </tr>
+                            <tr>
+                                <td>Sarah Miller</td>
+                                <td>$50</td>
+                                <td>Yesterday</td>
+                                <td>General</td>
+                            </tr>
+                            <tr>
+                                <td>David Taylor</td>
+                                <td>$200</td>
+                                <td>3 days ago</td>
+                                <td>Campaign</td>
+                            </tr>
+                            <tr>
+                                <td>Jessica Anderson</td>
+                                <td>$75</td>
+                                <td>1 week ago</td>
+                                <td>General</td>
+                            </tr>
+                            <tr>
+                                <td>Thomas Martinez</td>
+                                <td>$150</td>
+                                <td>2 weeks ago</td>
+                                <td>Equipment</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Blood Stock Section -->
+            <div class="blood-stock">
+                <h2>Blood Stock Levels</h2>
+                <div class="blood-groups">
+                    <div class="blood-group-card">
+                        <div class="blood-group">A+</div>
+                        <div class="blood-units">15 units</div>
+                        <div class="blood-status status-normal">In Stock</div>
+                    </div>
+                    <div class="blood-group-card">
+                        <div class="blood-group">A-</div>
+                        <div class="blood-units">8 units</div>
+                        <div class="blood-status status-normal">In Stock</div>
+                    </div>
+                    <div class="blood-group-card low">
+                        <div class="blood-group">B+</div>
+                        <div class="blood-units">4 units</div>
+                        <div class="blood-status status-low">Low Stock</div>
+                    </div>
+                    <div class="blood-group-card critical">
+                        <div class="blood-group">B-</div>
+                        <div class="blood-units">1 unit</div>
+                        <div class="blood-status status-critical">Critical</div>
+                    </div>
+                    <div class="blood-group-card">
+                        <div class="blood-group">AB+</div>
+                        <div class="blood-units">7 units</div>
+                        <div class="blood-status status-normal">In Stock</div>
+                    </div>
+                    <div class="blood-group-card low">
+                        <div class="blood-group">AB-</div>
+                        <div class="blood-units">3 units</div>
+                        <div class="blood-status status-low">Low Stock</div>
+                    </div>
+                    <div class="blood-group-card critical">
+                        <div class="blood-group">O+</div>
+                        <div class="blood-units">2 units</div>
+                        <div class="blood-status status-critical">Critical</div>
+                    </div>
+                    <div class="blood-group-card critical">
+                        <div class="blood-group">O-</div>
+                        <div class="blood-units">0 units</div>
+                        <div class="blood-status status-critical">Out of Stock</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="activity-section">
+                <h2>Recent Activity</h2>
+                <ul class="activity-list">
+                    <li class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-text">John Doe donated blood (O+)</div>
+                            <div class="activity-time">2 hours ago</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-text">Sarah Miller donated $50</div>
+                            <div class="activity-time">1 day ago</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-text">New donor registered: Robert Brown (AB+)</div>
+                            <div class="activity-time">2 days ago</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-ambulance"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-text">Emergency request fulfilled for O- blood</div>
+                            <div class="activity-time">3 days ago</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-text">New campaign launched for B- donors</div>
+                            <div class="activity-time">1 week ago</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-column">
+                <h3><i class="fas fa-tint"></i> LifeDrops</h3>
+                <p>Connecting donors with those in need since 2010. Our mission is to ensure a safe and sufficient blood supply for our community.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="d7home.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="d12funds.html"><i class="fas fa-chevron-right"></i> Donate Funds</a></li>
+                    <li><a href="d1.html"><i class="fas fa-chevron-right"></i> Services</a></li>
+                    <li><a href="d13dashboard.html"><i class="fas fa-chevron-right"></i> Dashboard</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-map-marker-alt"></i> 123 LifeSaver Ave, Health City</a></li>
+                    <li><a href="tel:+1234567890"><i class="fas fa-phone-alt"></i> (123) 456-7890</a></li>
+                    <li><a href="mailto:info@lifedrops.org"><i class="fas fa-envelope"></i> info@lifedrops.org</a></li>
+                    <li><a href="#"><i class="fas fa-clock"></i> Mon-Fri: 8AM-8PM</a></li>
+                    <li><a href="#"><i class="fas fa-clock"></i> Sat-Sun: 9AM-5PM</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 LifeDrops Blood Donation Management System. All rights reserved.</p>
+            <ul class="footer-links" style="display: flex; justify-content: center; margin-top: 15px;">
+                <li><a href="d9privacy.html">Privacy Policy</a></li>
+                <li style="margin: 0 15px;"><a href="d8terms.html">Terms of Service</a></li>
+                <li><a href="d6contact.html">Contact Us</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Back to Top Button
+        const backToTopBtn = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            backToTopBtn.classList.toggle('active', window.scrollY > 300);
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
